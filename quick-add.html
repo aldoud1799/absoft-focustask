@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .input-container {
+      background: rgba(30, 30, 46, 0.95);
+      border-radius: 8px;
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+    }
+    input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      outline: none;
+      font-family: inherit;
+    }
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    /* Light Mode Support - can be extended if needed via IPC settings */
+  </style>
+</head>
+<body>
+  <div class="input-container">
+    <input type="text" id="quickInput" placeholder="Add a new task..." autofocus>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    const input = document.getElementById('quickInput');
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const text = input.value.trim();
+        console.log('Quick Add Enter pressed:', text);
+        if (text) {
+          ipcRenderer.send('quick-add:submit', text);
+          input.value = '';
+        }
+      } else if (e.key === 'Escape') {
+        console.log('Quick Add Escape pressed');
+        ipcRenderer.send('quick-add:close');
+      }
+    });
+
+    // Focus input when window is shown
+    window.addEventListener('focus', () => {
+      input.focus();
+    });
+  </script>
+</body>
+</html>

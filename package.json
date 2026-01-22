@@ -1,0 +1,50 @@
+{
+  "name": "FocusTask",
+  "productName": "Focus Task",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "build:msix": "electron-builder --win appx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.absoft.focustask",
+    "productName": "Focus Task",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**/*",
+      "!**/*.map"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.png"
+    },
+    "appx": {
+      "identityName": "AB-Soft.FocusTask",
+      "applicationId": "FocusTask",
+      "publisher": "CN=D3C1CB62-CE42-4D1C-95E2-54272E9D9068",
+      "publisherDisplayName": "AB-Soft"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  },
+  "keywords": [],
+  "author": "AB-Soft",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12"
+  }
+}

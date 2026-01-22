@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Task</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="modal.css">
+  <link rel="stylesheet" href="stats.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar">
+      <div class="logo">
+        <img src="APPLOGO.png" alt="Focus Task Logo" class="app-logo-img">
+        <span>Focus Task</span>
+      </div>
+      
+      <div class="sidebar-section" style="display: none;">
+        <h3>PROJECTS</h3>
+        <div id="projectsList" class="projects-list">
+          </div>
+        <button id="addProjectBtn" class="add-project-btn">
+          <i class="fa-solid fa-plus"></i> New Project
+        </button>
+      </div>
+
+      <nav class="sidebar-navigation">
+        <button class="nav-btn active" data-tab="tasks">
+          <i class="fa-solid fa-list-check"></i> Tasks
+        </button>
+        <button class="nav-btn" data-tab="stats">
+          <i class="fa-solid fa-chart-simple"></i> Stats
+        </button>
+        <button class="nav-btn" data-tab="settings">
+          <i class="fa-solid fa-gear"></i> Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-theme">
+        <i class="fa-solid fa-moon theme-icon"></i>
+        <label class="toggle-switch">
+          <input type="checkbox" id="themeToggle">
+          <span class="slider"></span>
+        </label>
+        <i class="fa-solid fa-sun theme-icon"></i>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="focusModeBtn" class="focus-btn">
+          <i class="fa-solid fa-rocket"></i> Focus Mode
+        </button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      
+      <div id="tasks-view" class="view active">
+        <header class="project-header">
+          <div class="header-top">
+            <div>
+              <h2 id="currentProjectTitle">My Tasks</h2>
+              <span class="date-display" id="dateDisplay"></span>
+            </div>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div id="projectProgressBar" class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span id="projectProgressText">0% Complete</span>
+          </div>
+        </header>
+
+        <div class="tabs-container" style="display: none;">
+          <div id="subTabsList" class="sub-tabs">
+            </div>
+          <button id="addTabBtn" class="add-tab-btn">+</button>
+        </div>
+        
+        <div class="input-wrapper">
+          <input type="text" id="taskInput" placeholder="Add a new task...">
+          <button id="addTaskBtn" title="Add Task" aria-label="Add Task"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div class="tasks-container">
+          <ul id="taskList">
+            </ul>
+          <div id="emptyState" class="empty-state" style="display: none;">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <p>All caught up! No pending tasks.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="stats-view" class="view">
+        <header>
+          <h2>Productivity Stats</h2>
+        </header>
+        
+        <div class="stats-grid">
+          <div class="stat-card" data-period="daily">
+            <div class="icon-box daily"><i class="fa-solid fa-calendar-day"></i></div>
+            <div class="stat-info">
+              <h3>Today</h3>
+              <span class="stat-date" id="dateDaily"></span>
+              <p id="statDaily">0</p>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-period="monthly">
+            <div class="icon-box monthly"><i class="fa-solid fa-calendar-days"></i></div>
+            <div class="stat-info">
+              <h3>This Month</h3>
+              <span class="stat-date" id="dateMonthly"></span>
+              <p id="statMonthly">0</p>
+            </div>
+          </div>
+          
+          <div class="stat-card" data-period="yearly">
+            <div class="icon-box yearly"><i class="fa-solid fa-calendar"></i></div>
+            <div class="stat-info">
+              <h3>This Year</h3>
+              <span class="stat-date" id="dateYearly"></span>
+              <p id="statYearly">0</p>
+            </div>
+          </div>
+
+          <div class="stat-card" data-period="total">
+            <div class="icon-box total"><i class="fa-solid fa-check-double"></i></div>
+            <div class="stat-info">
+              <h3>Total Completed</h3>
+              <span class="stat-date">All Time</span>
+              <p id="statTotal">0</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="statsDetails" class="stats-details" style="display: none;">
+          <div class="details-header">
+            <h3 id="statsDetailsTitle">Tasks Completed Today</h3>
+            <button id="closeStatsBtn" class="close-stats-btn"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div id="statsList" class="stats-list">
+            </div>
+        </div>
+      </div>
+
+      <div id="settings-view" class="view">
+        <header>
+          <h2>Settings</h2>
+        </header>
+
+        <div class="settings-section">
+          <h3>Appearance</h3>
+          
+          <div class="setting-item">
+            <label>Accent Color</label>
+            <div class="color-options">
+              <div class="color-swatch swatch-purple active" data-color="purple"></div>
+              <div class="color-swatch swatch-blue" data-color="blue"></div>
+              <div class="color-swatch swatch-green" data-color="green"></div>
+              <div class="color-swatch swatch-orange" data-color="orange"></div>
+              <div class="color-swatch swatch-pink" data-color="pink"></div>
+            </div>
+          </div>
+
+          <div class="setting-item" style="display: none;">
+            <label>Project Management</label>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+              <span>Show Archived Projects</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="showArchivedToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>Auto-advance Tabs</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="autoAdvanceToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>About</h3>
+          <div class="about-info">
+            <p><strong>FocusTask</strong> <span class="badge">Beta</span></p>
+            <p>Version 1.0.0 (Testing Mode)</p>
+            <p>This application is for personal use only and has not been officially released.</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">Made & Owned by <strong>Absoft</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay" style="display: none;">
+    <div class="modal">
+      <h3 id="modalTitle">New Project</h3>
+      <input type="text" id="modalInput" placeholder="Enter name...">
+      
+      <div class="modal-color-options">
+        <div class="modal-color-swatch swatch-purple active" data-color="purple"></div>
+        <div class="modal-color-swatch swatch-blue" data-color="blue"></div>
+        <div class="modal-color-swatch swatch-green" data-color="green"></div>
+        <div class="modal-color-swatch swatch-orange" data-color="orange"></div>
+        <div class="modal-color-swatch swatch-pink" data-color="pink"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="modalCancelBtn" class="modal-btn cancel">Cancel</button>
+        <button id="modalConfirmBtn" class="modal-btn confirm">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  <script src="renderer.js"></script>
+</body>
+</html>

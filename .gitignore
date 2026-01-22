@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+windows-store-build/
+
+# OS files
+.DS_Store
+Thumbs.db
