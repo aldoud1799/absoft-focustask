@@ -1,0 +1,1 @@
+https://github.com/aldoud1799/absoft-focustask/blob/main/PRIVACY.md
