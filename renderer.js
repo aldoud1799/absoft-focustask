@@ -317,9 +317,11 @@ function applySettings(s) {
     // Apply Accent
     // Remove old accent classes
     document.body.classList.remove('accent-blue', 'accent-green', 'accent-orange', 'accent-pink');
+    /* 
     if (s.accent && s.accent !== 'purple') {
         document.body.classList.add(`accent-${s.accent}`);
-    }
+    } 
+    */
     
     // Update active swatch UI
     colorSwatches.forEach(swatch => {

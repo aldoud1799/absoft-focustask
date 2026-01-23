@@ -29,6 +29,6 @@ FocusTask is a desktop application designed to help you focus on one task at a t
 
 ## Development
 
-- Built with Electron.
+- Built for Windows.
 - Data is stored locally in `user-preferences.json`.
 - Backups are created automatically.

@@ -37,9 +37,11 @@ function applySettings(newSettings) {
 
   // Apply Accent
   document.body.className = document.body.className.replace(/accent-\w+/g, ''); // Remove old accent
+  /*
   if (newSettings.accent && newSettings.accent !== 'purple') {
     document.body.classList.add(`accent-${newSettings.accent}`);
   }
+  */
   
   // Update progress bar color
   if (progressBar) {
@@ -50,7 +52,7 @@ function applySettings(newSettings) {
           orange: '#ff9100',
           pink: '#f50057'
       };
-      progressBar.style.background = colors[newSettings.accent] || '#7c4dff';
+      // progressBar.style.background = colors[newSettings.accent] || '#7c4dff';
   }
 }
 

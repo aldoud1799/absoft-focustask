@@ -6,9 +6,9 @@
   --text-primary: #ffffff;
   --text-secondary: #a0a0b0;
   
-  /* Default Accent (Purple) */
-  --accent-color: #7c4dff;
-  --accent-hover: #651fff;
+  /* Default Accent (Orange Gradient Theme) */
+  --accent-color: #ffb600;
+  --accent-hover: #f7941d;
   
   --danger-color: #ff5252;
   --success-color: #00e676;
@@ -150,7 +150,7 @@ nav {
 }
 
 .nav-btn:hover, .nav-btn.active {
-  background: rgba(124, 77, 255, 0.1);
+  background: rgba(255, 182, 0, 0.1);
   color: var(--accent-color);
 }
 
@@ -182,12 +182,12 @@ nav {
   justify-content: center;
   gap: 10px;
   transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 182, 0, 0.3);
 }
 
 .focus-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(124, 77, 255, 0.4);
+  box-shadow: 0 6px 20px rgba(255, 182, 0, 0.4);
 }
 
 /* Project Tooltip */
@@ -698,7 +698,7 @@ ul {
 }
 
 .daily { background: rgba(0, 230, 118, 0.1); color: var(--success-color); }
-.monthly { background: rgba(124, 77, 255, 0.1); color: var(--accent-color); }
+.monthly { background: rgba(255, 182, 0, 0.1); color: var(--accent-color); }
 .yearly { background: rgba(255, 171, 0, 0.1); color: #ffab00; }
 .total { background: rgba(41, 121, 255, 0.1); color: #2979ff; }
 
@@ -766,7 +766,7 @@ body.light-mode .settings-section h3 {
   border-color: var(--text-primary);
 }
 
-.swatch-purple { background: #7c4dff; }
+.swatch-purple { background: linear-gradient(135deg, #ffb600, #f7941d); }
 .swatch-blue { background: #2979ff; }
 .swatch-green { background: #00e676; }
 .swatch-orange { background: #ff9100; }
@@ -822,6 +822,7 @@ input:checked + .slider:before {
 .about-info p {
   margin: 5px 0;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .about-info strong {

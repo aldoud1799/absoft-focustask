@@ -13,7 +13,8 @@
     "appId": "com.absoft.focustask",
     "productName": "Focus Task",
     "directories": {
-      "output": "dist"
+      "output": "dist",
+      "buildResources": "build"
     },
     "files": [
       "**/*",
@@ -22,7 +23,7 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "assets/icon.png"
+      "icon": "build/appx/LargeTile.png"
     },
     "appx": {
       "identityName": "AB-Soft.FocusTask",
@@ -32,17 +33,17 @@
     },
     "mac": {
       "target": "dmg",
-      "icon": "assets/icon.icns"
+      "icon": "APPLOGO.png"
     },
     "linux": {
       "target": "AppImage",
-      "icon": "assets/icon.png"
+      "icon": "APPLOGO.png"
     }
   },
   "keywords": [],
   "author": "AB-Soft",
   "license": "ISC",
-  "description": "",
+  "description": "Focus Task is a dedicated productivity environment designed to streamline your workflow and minimize distractions.",
   "devDependencies": {
     "electron": "^39.2.7",
     "electron-builder": "^26.0.12"

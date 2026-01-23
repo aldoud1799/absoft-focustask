@@ -146,7 +146,7 @@ body.light-mode .modal-btn.cancel:hover {
   transform: scale(1.1);
 }
 
-.swatch-purple { background: #7c4dff; }
+.swatch-purple { background: linear-gradient(135deg, #ffb600, #f7941d); }
 .swatch-blue { background: #2979ff; }
 .swatch-green { background: #00e676; }
 .swatch-orange { background: #ff9100; }

@@ -72,14 +72,14 @@ let quickAddWindow;
 let tray;
 
 function getIcon() {
+  // Use high-resolution branded asset from build/appx directory for Windows MSIX/AppX
+  const appxIcon = path.join(__dirname, 'build/appx/Square150x150Logo.png');
+  if (fs.existsSync(appxIcon)) {
+    return appxIcon;
+  }
   const iconPath = path.join(__dirname, 'APPLOGO.png');
   if (fs.existsSync(iconPath)) {
     return iconPath;
-  }
-  // Fallback to assets/icon.png if APPLOGO doesn't exist
-  const fallbackPath = path.join(__dirname, 'assets/icon.png');
-  if (fs.existsSync(fallbackPath)) {
-    return fallbackPath;
   }
   return nativeImage.createEmpty();
 }
@@ -102,7 +102,8 @@ function createMainWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: getIcon()
+    icon: getIcon(),
+    backgroundColor: '#1e1e2e' // Match default dark theme
   });
 
   mainWindow.loadFile('index.html');
@@ -156,6 +157,7 @@ function createWidgetWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
+    icon: getIcon(),
     show: false
   });
 
@@ -195,6 +197,7 @@ function createQuickAddWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
+    icon: getIcon(),
     show: false
   });
 
@@ -226,13 +229,55 @@ function createTray() {
   });
 }
 
+let splashWindow;
+
+function createSplashWindow() {
+  splashWindow = new BrowserWindow({
+    width: 500,
+    height: 300,
+    frame: false,
+    alwaysOnTop: true,
+    transparent: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    },
+    icon: getIcon()
+  });
+
+  splashWindow.loadFile('splash.html');
+  splashWindow.center();
+}
+
 app.whenReady().then(() => {
   if (!gotTheLock) return; // Stop if we didn't get the lock
 
-  createMainWindow();
+  createSplashWindow();
+  
+  // Initialize other windows in background but don't show yet
   createWidgetWindow();
   createQuickAddWindow();
   createTray();
+
+  // Wait 1 second before showing main window
+  setTimeout(() => {
+    createMainWindow();
+    
+    // Smooth transition: fade out splash
+    let opacity = 1.0;
+    const fadeTimer = setInterval(() => {
+      opacity -= 0.05;
+      if (opacity <= 0) {
+        clearInterval(fadeTimer);
+        if (splashWindow) {
+          splashWindow.close();
+          splashWindow = null;
+        }
+      } else {
+        if (splashWindow) splashWindow.setOpacity(opacity);
+      }
+    }, 20); // 20ms steps for smooth fade
+  }, 2000);
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
