@@ -28,8 +28,9 @@ body.light-mode {
 
 body.light-mode input[type="text"] {
   color: #2c3e50;
-  border: 1px solid #ddd;
+  border: none;
   background: #f8f9fa;
+  outline: none;
 }
 
 /* Accent Color Overrides */
@@ -152,6 +153,7 @@ nav {
 .nav-btn:hover, .nav-btn.active {
   background: rgba(255, 182, 0, 0.1);
   color: var(--accent-color);
+  font-weight: 700;
 }
 
 .sidebar-theme {
@@ -183,6 +185,7 @@ nav {
   gap: 10px;
   transition: var(--transition);
   box-shadow: 0 4px 15px rgba(255, 182, 0, 0.3);
+  font-weight: 700;
 }
 
 .focus-btn:hover {

@@ -1,7 +1,7 @@
 {
   "name": "FocusTask",
   "productName": "Focus Task",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -29,7 +29,8 @@
       "identityName": "AB-Soft.FocusTask",
       "applicationId": "FocusTask",
       "publisher": "CN=D3C1CB62-CE42-4D1C-95E2-54272E9D9068",
-      "publisherDisplayName": "AB-Soft"
+      "publisherDisplayName": "AB-Soft",
+      "backgroundColor": "#1e1e2e"
     },
     "mac": {
       "target": "dmg",

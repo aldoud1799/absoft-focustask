@@ -71,18 +71,8 @@ let widgetWindow;
 let quickAddWindow;
 let tray;
 
-function getIcon() {
-  // Use high-resolution branded asset from build/appx directory for Windows MSIX/AppX
-  const appxIcon = path.join(__dirname, 'build/appx/Square150x150Logo.png');
-  if (fs.existsSync(appxIcon)) {
-    return appxIcon;
-  }
-  const iconPath = path.join(__dirname, 'APPLOGO.png');
-  if (fs.existsSync(iconPath)) {
-    return iconPath;
-  }
-  return nativeImage.createEmpty();
-}
+// getIcon function removed
+
 
 function createMainWindow() {
   if (mainWindow) {
@@ -102,7 +92,7 @@ function createMainWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: getIcon(),
+    icon: path.join(__dirname, 'assets/icon.png'),
     backgroundColor: '#1e1e2e' // Match default dark theme
   });
 
@@ -157,7 +147,7 @@ function createWidgetWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: getIcon(),
+    icon: path.join(__dirname, 'assets/icon.png'),
     show: false
   });
 
@@ -197,7 +187,7 @@ function createQuickAddWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: getIcon(),
+    icon: path.join(__dirname, 'assets/icon.png'),
     show: false
   });
 
@@ -213,7 +203,7 @@ function createQuickAddWindow() {
 }
 
 function createTray() {
-  tray = new Tray(getIcon());
+  tray = new Tray(path.join(__dirname, 'assets/Square44x44Logo.png'));
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show App', click: () => createMainWindow() },
     { label: 'Quit', click: () => {
@@ -242,7 +232,7 @@ function createSplashWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: getIcon()
+    icon: path.join(__dirname, 'assets/icon.png')
   });
 
   splashWindow.loadFile('splash.html');
@@ -250,6 +240,7 @@ function createSplashWindow() {
 }
 
 app.whenReady().then(() => {
+  app.setAppUserModelId("AB-Soft.FocusTask");
   if (!gotTheLock) return; // Stop if we didn't get the lock
 
   createSplashWindow();
